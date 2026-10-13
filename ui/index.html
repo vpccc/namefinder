@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en" data-theme="iris">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="dark"><title>Namefinder</title><link rel="icon" href="/icon.svg"><link rel="stylesheet" href="/style.css"><script src="/ui.js" defer></script></head>
+<body>
+<svg class="sprite" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+ <symbol id="i-search" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 4.5 4.5"/></symbol>
+ <symbol id="i-results" viewBox="0 0 24 24"><rect x="4" y="3" width="16" height="18" rx="4"/><path d="M8 8h8M8 12h8M8 16h4"/></symbol>
+ <symbol id="i-settings" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/><circle cx="9" cy="6" r="2"/><circle cx="15" cy="12" r="2"/><circle cx="9" cy="18" r="2"/></symbol>
+ <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14m-6-6 6 6-6 6"/></symbol>
+ <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></symbol>
+ <symbol id="i-copy" viewBox="0 0 24 24"><rect x="8" y="8" width="12" height="13" rx="3"/><path d="M15 8V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h3"/></symbol>
+ <symbol id="i-external" viewBox="0 0 24 24"><path d="M14 3h7v7m0-7L10 14M10 4H5a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2h13a2 2 0 0 0 2-2v-5"/></symbol>
+ <symbol id="i-download" viewBox="0 0 24 24"><path d="M12 3v12m-5-5 5 5 5-5M4 16v4h16v-4"/></symbol>
+ <symbol id="i-spark" viewBox="0 0 24 24"><path d="m12 3 2.5 6.5L21 12l-6.5 2.5L12 21l-2.5-6.5L3 12l6.5-2.5z"/></symbol>
+ <symbol id="i-minecraft" viewBox="0 0 48 48"><path d="m24 3 20 11-20 12L4 14z" fill="#8ec76a"/><path d="m4 14 20 12v22L4 36z" fill="#9c633d"/><path d="m24 26 20-12v22L24 48z" fill="#73452f"/><path d="m4 14 20 12v8l-5-3v-4l-5-3v5l-5-3v-5l-5-3z" fill="#639b46"/><path d="m24 26 20-12v8l-5 3v-4l-5 3v5l-5 3v-5l-5 3z" fill="#467d3d"/><path d="m12 10 6 3 5-3 7 4 7-4-13-7z" fill="#a7dd79"/><path d="m9 31 5 3v5l-5-3zm9 8 4 2v4l-4-2z" fill="#b78051"/><path d="m30 36 5-3v5l-5 3zm8-7 4-2v4l-4 2z" fill="#94603f"/></symbol>
+ <symbol id="i-discord" viewBox="0 0 48 48"><path d="M37 10a35 35 0 0 0-9-3l-1 3a31 31 0 0 0-6 0l-1-3a34 34 0 0 0-9 3C5 19 3 27 4 35a34 34 0 0 0 11 6l3-5-4-2 1-1c6 3 12 3 18 0l1 1-4 2 3 5a34 34 0 0 0 11-6c1-9-2-17-7-25Z" fill="currentColor"/><ellipse cx="17" cy="25" rx="3.5" ry="4.5" fill="#11121b"/><ellipse cx="31" cy="25" rx="3.5" ry="4.5" fill="#11121b"/></symbol>
+ <symbol id="i-ubisoft" viewBox="0 0 48 48"><path d="M13 9C26-3 45 8 43 26c-1 14-20 24-32 12C0 27 8 12 20 10c11-2 21 10 15 20-4 7-15 9-20 1-4-7 1-15 8-15 7 0 10 8 6 12-3 3-8 2-8-2" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round"/><path d="m13 9 3 5" stroke="currentColor" stroke-width="3.5"/></symbol>
+</svg>
+<div class="app-shell">
+ <header class="topbar">
+  <a class="brand" href="#" aria-label="Namefinder home"><img src="/icon.svg" alt="" width="36" height="36"><span>Namefinder<span class="brand-dot">.</span></span></a>
+  <nav class="tabs" role="tablist" aria-label="Main navigation">
+   <button class="tab active" role="tab" aria-selected="true" aria-controls="page-search" id="tab-search" data-tab="search"><svg><use href="#i-search"/></svg>Search</button>
+   <button class="tab" role="tab" aria-selected="false" aria-controls="page-results" id="tab-results" data-tab="results" tabindex="-1"><svg><use href="#i-results"/></svg>Results<span id="result-count" class="nav-count" hidden>0</span></button>
+   <button class="tab" role="tab" aria-selected="false" aria-controls="page-settings" id="tab-settings" data-tab="settings" tabindex="-1"><svg><use href="#i-settings"/></svg>Settings</button>
+  </nav>
+  <div class="connection"><span class="status-dot"></span><span id="connection-label">Connecting</span></div>
+ </header>
+ <main>
+  <section class="page" id="page-search" role="tabpanel" aria-labelledby="tab-search">
+   <div class="page-heading"><div><p class="eyebrow">YOUR NEXT USERNAME</p><h1>Find a name<span class="accent-dot">.</span></h1></div><span class="small-tag">3–5 characters</span></div>
+   <div class="platforms" role="group" aria-label="Platform">
+    <button class="platform selected" data-platform="minecraft" aria-pressed="true"><span class="platform-icon minecraft"><svg><use href="#i-minecraft"/></svg></span><span class="platform-label"><strong>Minecraft</strong><small>Java Edition</small></span><span class="selection-mark"><svg><use href="#i-check"/></svg></span></button>
+    <button class="platform" data-platform="discord" aria-pressed="false"><span class="platform-icon discord"><svg><use href="#i-discord"/></svg></span><span class="platform-label"><strong>Discord</strong><small>Usernames</small></span><span class="selection-mark"><svg><use href="#i-check"/></svg></span></button>
+    <button class="platform" data-platform="ubisoft" aria-pressed="false"><span class="platform-icon ubisoft"><svg><use href="#i-ubisoft"/></svg></span><span class="platform-label"><strong>Ubisoft</strong><small>Rainbow Six Siege</small></span><span class="selection-mark"><svg><use href="#i-check"/></svg></span></button>
+   </div>
+   <div class="search-grid">
+    <section class="panel builder"><div class="panel-title"><h2>Search setup</h2><span class="quiet">01</span></div>
+     <fieldset id="search-controls">
+      <div class="source-switch" role="group" aria-label="Name style"><button class="selected" data-source="random" aria-pressed="true"><span class="mono">Aa</span>Random characters</button><button data-source="dictionary" aria-pressed="false"><svg><use href="#i-spark"/></svg>English words</button></div>
+      <div class="field-row three"><div class="field"><label>Length</label><div class="length-switch" role="group" aria-label="Length"><button data-length="3" aria-pressed="false">3c</button><button data-length="4" class="selected" aria-pressed="true">4c</button><button data-length="5" aria-pressed="false">5c</button></div></div><div class="field"><label for="count">Batch size</label><input id="count" type="number" min="1" max="5000" value="100"></div><div class="field"><label for="speed">Speed</label><div class="select-wrap"><select id="speed"><option>Gentle</option><option selected>Fast</option><option>Turbo</option></select></div></div></div>
+      <div class="field"><div class="label-line"><label for="pattern">Pattern</label><span class="field-note">Optional</span></div><input id="pattern" class="mono" maxlength="5" placeholder="e.g. a???" autocomplete="off" spellcheck="false"><p class="hint" id="pattern-hint">Use ? for any character.</p></div>
+      <div class="field"><label>Characters</label><div class="character-options">
+       <label class="character"><input id="letters" type="checkbox" checked><span class="switch"></span><span>Letters<small>a–z</small></span></label>
+       <label class="character"><input id="numbers" type="checkbox" checked><span class="switch"></span><span>Numbers<small>0–9</small></span></label>
+       <label class="character"><input id="underscores" type="checkbox" checked><span class="switch"></span><span>Underscore<small>_</small></span></label>
+       <label class="character"><input id="periods" type="checkbox" disabled><span class="switch"></span><span>Period<small>.</small></span></label>
+       <label class="character"><input id="dashes" type="checkbox" disabled><span class="switch"></span><span>Dash<small>−</small></span></label>
+      </div></div>
+      <details class="paste-details"><summary>Use your own list<span>+</span></summary><textarea id="supplied" rows="3" placeholder="moon, ghost, fox…" spellcheck="false" aria-label="Your own username list"></textarea><p class="hint">Overrides generation. Match the selected length and characters.</p></details>
+     </fieldset>
+    </section>
+    <aside class="search-side">
+     <section class="panel preview-panel"><div class="panel-title"><h2>On the shortlist</h2><button class="icon-button" id="shuffle" title="Refresh preview" aria-label="Refresh preview">↻</button></div><p class="hint preview-note">A preview of your search</p><div class="name-preview" id="preview-names"><span>—</span><span>—</span><span>—</span><span>—</span><span>—</span><span>—</span></div><p class="preview-caption" id="preview-caption">100 names · 4 characters</p><p class="inline-error" id="preview-error" hidden></p>
+      <div class="scan-progress" id="scan-progress" hidden><div class="progress-numbers"><span><strong id="checked">0</strong><small>checked</small></span><span><strong id="found">0</strong><small>potential</small></span><span class="percent" id="percent">0%</span></div><div class="progress-track"><div id="progress-fill"></div></div></div>
+      <div class="session-notice" id="session-notice" hidden><span id="session-notice-text">Ubisoft session required</span><button id="setup-session" class="text-button">Set up <span>↗</span></button></div>
+      <button class="primary-button" id="start"><span>Start search</span><svg><use href="#i-arrow"/></svg></button><button class="stop-button" id="stop" hidden><span class="stop-square"></span>Stop search</button>
+      <p class="inline-error" id="start-error" role="alert" hidden></p><div class="scan-meta"><span class="status-dot muted-dot" id="webhook-dot"></span><span id="webhook-status">Webhook off</span><button class="text-button" data-go-settings>Configure</button></div>
+     </section>
+     <section class="panel recent-panel"><div class="panel-title"><h2>Latest finds</h2><button class="text-button" id="view-results">View all ↗</button></div><div id="recent-finds" class="recent-list"><div class="mini-empty"><svg><use href="#i-results"/></svg><span>No matches yet</span></div></div></section>
+    </aside>
+   </div>
+  </section>
+  <section class="page" id="page-results" role="tabpanel" aria-labelledby="tab-results" hidden>
+   <div class="page-heading"><div><p class="eyebrow">THE SHORTLIST</p><h1>Your results<span class="accent-dot">.</span></h1></div><button class="secondary-button" id="export" disabled><svg><use href="#i-download"/></svg>Export CSV</button></div>
+   <div class="results-summary"><div class="summary-cell"><span>Checked</span><strong id="results-checked">0</strong></div><div class="summary-cell"><span>Potential</span><strong class="accent-text" id="results-found">0</strong></div><div class="summary-cell"><span>Platform</span><strong class="summary-platform" id="results-platform">Minecraft</strong></div></div>
+   <section class="panel results-panel"><div class="results-toolbar"><h2>All usernames <span class="quiet" id="table-count">0</span></h2><div class="result-filters" role="group" aria-label="Result filter"><button class="selected" data-filter="all" aria-pressed="true">All</button><button data-filter="potential" aria-pressed="false">Potential only</button></div></div><div class="table-wrap"><table><thead><tr><th>Username</th><th>Status</th><th>Delivery / details</th><th><span class="sr-only">Actions</span></th></tr></thead><tbody id="results-body"></tbody></table><div class="empty-state" id="results-empty"><div class="empty-symbol"><svg><use href="#i-search"/></svg></div><h3>Nothing here yet</h3><p>Run a search to start your shortlist.</p><button class="secondary-button" id="back-to-search">Go to search<svg><use href="#i-arrow"/></svg></button></div></div><div class="table-footer"><span id="table-caption">0 usernames</span><span>Potential ≠ confirmed. Check before claiming.</span></div><div class="pagination" id="pagination" hidden><button class="text-button" id="prev-page">← Previous</button><span id="page-number"></span><button class="text-button" id="next-page">Next →</button></div></section>
+  </section>
+  <section class="page" id="page-settings" role="tabpanel" aria-labelledby="tab-settings" hidden>
+   <div class="page-heading"><div><p class="eyebrow">MAKE IT YOURS</p><h1>Settings<span class="accent-dot">.</span></h1></div><span class="small-tag">Saved on this device</span></div>
+   <section class="panel appearance-panel"><div class="panel-title"><div><h2>Appearance</h2><p class="hint">Five palettes. Pick your favourite.</p></div></div><div class="themes" id="themes">
+    <button class="theme-tile selected" data-theme="iris" aria-pressed="true"><span class="theme-swatch" style="--swatch-a:#9d7dff;--swatch-b:#6ab9ff"><i></i><i></i><i></i></span><span class="theme-name">Iris<svg><use href="#i-check"/></svg></span></button>
+    <button class="theme-tile" data-theme="lagoon" aria-pressed="false"><span class="theme-swatch" style="--swatch-a:#4ed9b4;--swatch-b:#53b8ed"><i></i><i></i><i></i></span><span class="theme-name">Lagoon<svg><use href="#i-check"/></svg></span></button>
+    <button class="theme-tile" data-theme="ember" aria-pressed="false"><span class="theme-swatch" style="--swatch-a:#f8ac6c;--swatch-b:#f17e8a"><i></i><i></i><i></i></span><span class="theme-name">Ember<svg><use href="#i-check"/></svg></span></button>
+    <button class="theme-tile" data-theme="rose" aria-pressed="false"><span class="theme-swatch" style="--swatch-a:#f18db9;--swatch-b:#b594f6"><i></i><i></i><i></i></span><span class="theme-name">Rose<svg><use href="#i-check"/></svg></span></button>
+    <button class="theme-tile" data-theme="glacier" aria-pressed="false"><span class="theme-swatch" style="--swatch-a:#78baff;--swatch-b:#8edee1"><i></i><i></i><i></i></span><span class="theme-name">Glacier<svg><use href="#i-check"/></svg></span></button>
+   </div><div class="setting-row"><div><strong>Animations</strong><p class="hint">Soft transitions and hover effects</p></div><label class="toggle-only"><input id="motion" type="checkbox" checked aria-label="Animations"><span class="switch"></span></label></div></section>
+   <div class="settings-grid"><section class="panel integration-panel"><div class="panel-title"><div class="integration-title"><svg class="discord-color"><use href="#i-discord"/></svg><h2>Discord webhook</h2></div><span class="small-tag">Optional</span></div><p class="hint">Send new finds straight to your channel.</p><label class="field-label" for="webhook">Webhook URL</label><div class="secret-field"><input id="webhook" type="password" placeholder="https://discord.com/api/webhooks/…" autocomplete="off" spellcheck="false"><button class="text-button" id="show-webhook">Show</button></div><p class="hint">Kept for this session only.</p><div class="integration-foot"><span id="webhook-settings-status">Not connected</span><button class="text-button" id="clear-webhook">Clear</button></div></section>
+   <section class="panel integration-panel"><div class="panel-title"><div class="integration-title"><svg><use href="#i-ubisoft"/></svg><h2>Ubisoft session</h2></div><span class="small-tag">Experimental</span></div><p class="hint warning-copy">Automated checks can put your account at risk.</p><label class="field-label" for="ticket">Authorization value</label><input id="ticket" type="password" placeholder="Ubi_v1 t=…" autocomplete="off" spellcheck="false"><details class="session-details"><summary>Session ID <span class="quiet">Optional</span></summary><input id="session-id" type="password" aria-label="Ubisoft session ID" placeholder="Optional session ID" autocomplete="off"></details><div class="integration-foot"><button class="text-button" id="session-help">Where do I find this? ↗</button><button class="text-button" id="clear-session">Clear</button></div></section></div>
+   <div class="settings-bottom"><p>Only your theme and animation preference are saved.</p><button class="text-button" id="quit">Quit Namefinder ↗</button></div>
+  </section>
+ </main>
+ <footer class="app-footer"><div><span class="status-dot" id="activity-dot"></span><span id="activity" role="status">Ready</span></div><span>NAMEFINDER <span class="quiet">/ 07</span></span></footer>
+</div>
+<div class="toast" id="toast" role="status" hidden></div>
+<dialog id="session-dialog"><div class="dialog-heading"><h2>Your Ubisoft session</h2><button class="icon-button" id="close-dialog" aria-label="Close help">×</button></div><p class="warning-copy">Automated lookups can lead to restrictions. This mode has not been tested with a live authenticated account.</p><ol><li>Sign in on the official Ubisoft account page.</li><li>Press F12, open Network, then refresh.</li><li>Select a request to <code>public-ubiservices.ubi.com</code>.</li><li>Under Request Headers, copy Authorization, starting with <code>Ubi_v1 t=</code>.</li><li>Paste it into this app. Copy Ubi-SessionId too if present.</li></ol><p class="hint">Treat the ticket like a password. Never share it. This app keeps it in memory and sends it only to Ubisoft for read-only profile checks.</p><a class="secondary-button" href="https://account.ubisoft.com/" target="_blank" rel="noreferrer">Open Ubisoft<svg><use href="#i-external"/></svg></a></dialog>
+</body></html>

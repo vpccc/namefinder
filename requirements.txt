@@ -1,0 +1,2 @@
+# Version 7 uses only Python standard library. No pip packages required.
+# The interface uses the installed Edge/Chrome browser, or your default browser.
