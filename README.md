@@ -130,6 +130,8 @@ Build a clean source release with `python build_release.py`.
 
 Run `py -3 -m unittest discover -s tests -v`. The 80 tests cover the local API, appearance persistence, export authorization, credential isolation, generation, dictionary filters, all three response parsers, blocking, retries, cooldowns, cancellation, cache expiry, platform-specific alerts and separate histories. Security regressions also cover unauthorized mutations, stalled connections, connection limits, response bounds and release exclusions. Live webhook delivery requires your webhook and was not performed during packaging.
 
+This application was created by chatGPT 6 astra as a cool test of its capabilitys.
+
 - [Ubisoft username changes](https://www.ubisoft.com/en-gb/help/article/000077823)
 - [Ubisoft terms and username restrictions](https://www.ubisoft.com/legal/documents/termsofuse/en-INTL)
 - [Official Ubisoft account page](https://account.ubisoft.com/)
